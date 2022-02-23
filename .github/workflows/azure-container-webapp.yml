@@ -52,8 +52,8 @@ jobs:
       - run: cd ./server && docker build -t ah363702/node-react-docker .
       - run: cd ./server && docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
-          DOCKER_USERNAME: ${{ secrets.docker.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.docker.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - run: cd ./server && docker push ah363702/node-react-docker
       
   # deploy:
