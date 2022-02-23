@@ -51,7 +51,7 @@ jobs:
       - run: npm run build
       - run: npm run test:ci
       - run: docker build -t ah363702/node-react-docker .
-      - run: docker login -u $DOCKER_USERNAME - $DOCKER_PASSWORD
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
