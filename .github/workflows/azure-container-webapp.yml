@@ -44,11 +44,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v1
 
       - run: cd ./client && npm install && cd ..
       - run: cd ./server && npm install
-      - run: npm run build
+      - run: npm run build:client
       - run: npm run test:ci
       - run: docker build -t ah363702/node-react-docker .
       - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
