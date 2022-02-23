@@ -26,8 +26,8 @@
 
 name: Build and deploy a container to an Azure Web App
 
-# env:
-#   AZURE_WEBAPP_NAME: your-app-name # set this to the name of your Azure Web App
+env:
+  AZURE_WEBAPP_NAME: docker-react-node # set this to the name of your Azure Web App
 
 on:
   push:
@@ -56,21 +56,14 @@ jobs:
       - run: cd ./server && docker build -t ah363702/node-react-docker .
       - run: cd ./server && docker push ah363702/node-react-docker
       
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   environment:
-  #     name: "Development"
-  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-  #   steps:
-  #     - name: Lowercase the repo name and username
-  #       run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-
-  #     - name: Deploy to Azure Web App
-  #       id: deploy-to-webapp
-  #       uses: azure/webapps-deploy@v2
-  #       with:
-  #         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-  #         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-  #         images: "ghcr.io/${{ env.REPO }}:${{ github.sha }}"
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: "hub.docker.com/repository/docker/ah363702/node-react-docker"
