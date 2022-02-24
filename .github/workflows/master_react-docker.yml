@@ -35,23 +35,24 @@ jobs:
         push: true
         # tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_0c12e74172ec469c849fcd43ab90c0f2 }}/ah363702/node-react-docker:${{ github.sha }}
         tags: ah363702/node-react-docker:latest
+        run: cd ./client && npm install && cd ../server && npm run build:client
         file: ./server/Dockerfile.prod
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: build
+#     environment:
+#       name: 'production'
+#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-    - name: Deploy to Azure Web App
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'react-docker'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f7d8e155aff6431a85bc97f8cacf6f09 }}
-        # images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_0c12e74172ec469c849fcd43ab90c0f2 }}/ah363702/node-react-docker:${{ github.sha }}'
-        # images: 'https://hub.docker.com/repository/docker/ah363702/node-react-docker:latest'
-        images: 'index.docker.io/ah363702/node-react-docker:latest'
+#     steps:
+#     - name: Deploy to Azure Web App
+#       id: deploy-to-webapp
+#       uses: azure/webapps-deploy@v2
+#       with:
+#         app-name: 'react-docker'
+#         slot-name: 'production'
+#         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f7d8e155aff6431a85bc97f8cacf6f09 }}
+#         # images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_0c12e74172ec469c849fcd43ab90c0f2 }}/ah363702/node-react-docker:${{ github.sha }}'
+#         # images: 'https://hub.docker.com/repository/docker/ah363702/node-react-docker:latest'
+#         images: 'index.docker.io/ah363702/node-react-docker:latest'
