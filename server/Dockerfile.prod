@@ -1,12 +1,11 @@
 FROM node:lts-alpine
 ENV NODE_ENV=production
-ENV MONGO_HOST "host.docker.internal"
-ENV ROOT_URL=http://localhost
-WORKDIR /usr/src/app
+
+WORKDIR /app
 COPY ["./server/package.json", "./server/package-lock.json*", "./server/npm-shrinkwrap.json*", "./"]
-RUN cd ./server && npm install --production && mv node_modules ../ && cd ..
+RUN cd ./server && npm install --production
 COPY ./server .
 EXPOSE 4000 80
-RUN chown -R node /usr/src/app
+RUN chown -R node /app
 USER node
 CMD ["npm", "start"]
