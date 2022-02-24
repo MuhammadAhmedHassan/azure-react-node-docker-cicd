@@ -5,6 +5,7 @@ ENV ROOT_URL=http://localhost
 WORKDIR /usr/src/app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --production && mv node_modules ../
+RUN npm run build:client
 COPY . .
 EXPOSE 2222 80
 RUN chown -R node /usr/src/app
