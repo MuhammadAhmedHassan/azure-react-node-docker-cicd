@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  nodeReactDocker:
+    image: ah363702/node-react-docker:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile.prod
+    environment:
+      NODE_ENV: production
+      # JWT_KEY: dsafasdklfj
+      # MONGO_URI: ''
+      PORT: 4000
+    ports:
+      - 80:4000
