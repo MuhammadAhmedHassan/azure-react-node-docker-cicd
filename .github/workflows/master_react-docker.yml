@@ -35,7 +35,7 @@ jobs:
         push: true
         # tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_0c12e74172ec469c849fcd43ab90c0f2 }}/ah363702/node-react-docker:${{ github.sha }}
         tags: ah363702/${{ secrets.AzureAppService_ContainerUsername_0c12e74172ec469c849fcd43ab90c0f2 }}/ah363702/node-react-docker:latest
-        file: ./Dockerfile
+        file: ./server/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
