@@ -60,12 +60,8 @@ jobs:
     needs: build
     steps:
       - name: Deploy to Azure Web App
-      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: "https://hub.docker.com/repository/docker/ah363702/node-react-docker:latest"
+          images: "hub.docker.com/repository/docker/ah363702/node-react-docker:latest"
