@@ -10,7 +10,14 @@ pipeline {
     
     stage("build") {
       steps {
+        sh 'cd client'
+        sh 'ls'
+        echo '----------------------------------------------------'
         echo "building the app"
+        script {
+          def test = 2 + 2 > 3 ? 'cool' : 'not cool'
+          echo test
+        }
       }
     }
     stage("deploy") {
